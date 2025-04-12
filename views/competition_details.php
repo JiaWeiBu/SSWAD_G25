@@ -10,11 +10,13 @@ $auth = new AuthController($db);
 $competitionController = new CompetitionController($db);
 $entryController = new EntryController($db);
 
+// Check if the user is authenticated
 if (!$auth->isAuthenticated()) {
     header("Location: login.php");
     exit();
 }
 
+// Get competition details by ID
 $competitionId = $_GET['id'] ?? null;
 
 if (!$competitionId || !($competition = $competitionController->getCompetitionById($competitionId))) {
@@ -22,6 +24,7 @@ if (!$competitionId || !($competition = $competitionController->getCompetitionBy
     exit();
 }
 
+// Fetch all entries for the competition
 $entries = $entryController->getEntriesByCompetitionId($competitionId);
 ?>
 

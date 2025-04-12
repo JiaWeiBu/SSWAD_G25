@@ -10,6 +10,7 @@ $auth = new AuthController($db);
 $entryController = new EntryController($db);
 $recipeController = new RecipeController($db);
 
+// Check if the user is authenticated
 if (!$auth->isAuthenticated()) {
     header("Location: login.php");
     exit();
@@ -17,9 +18,13 @@ if (!$auth->isAuthenticated()) {
 
 $userId = $auth->getUserId();
 $competitionId = $_GET['competition_id'] ?? null;
-$recipes = $recipeController->getRecipesByUserId($userId);
+
+// Retrieve recipes from the session
+$recipes = $_SESSION['recipes'] ?? [];
+unset($_SESSION['recipes']); // Clear session data after use
 $error = '';
 
+// Handle form submission for submitting an entry
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recipeId = $_POST['recipe_id'] ?? '';
     
@@ -44,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h2>Submit Your Recipe</h2>
         <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
+        
+        <!-- Entry submission form -->
         <form method="post" action="">
             <label for="recipe_id">Select Recipe:</label>
             <select id="recipe_id" name="recipe_id" required>

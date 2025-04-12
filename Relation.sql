@@ -7,6 +7,10 @@ CREATE OR REPLACE TABLE Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE Users
+ADD COLUMN reset_token VARCHAR(255) DEFAULT NULL,
+ADD COLUMN reset_token_expiry DATETIME DEFAULT NULL;
+
 CREATE OR REPLACE TABLE Recipes (
     recipe_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -21,7 +25,7 @@ CREATE OR REPLACE TABLE Ingredients (
     ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) UNIQUE NOT NULL,
     description TEXT
-);  data
+);
 
 CREATE OR REPLACE TABLE RecipeIngredients (
     recipe_id INT,
@@ -54,7 +58,9 @@ CREATE OR REPLACE TABLE Competitions (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     start_date DATE NOT NULL,
-    end_date DATE NOT NULL
+    end_date DATE NOT NULL,
+    created_by INT NOT NULL,
+    FOREIGN KEY (created_by) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 CREATE OR REPLACE TABLE CompetitionEntries (
@@ -137,3 +143,13 @@ INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity) VALUES
 (5, 7, '2 tbsp'),
 (5, 8, '1 tbsp'),
 (5, 9, '1 foot-long');
+
+-- Insert data into Users table
+INSERT INTO Users (user_id, username, email, password_hash, role, created_at) VALUES
+(1, 'Admin', 'Admin@utar.my', '$2y$10$BNyytPQTylj1kgIUhs6vNO3lPZDVwJzBIYX.JLDvjXuNrUQdIqeMi', 'user', '2025-03-22 06:45:25'),
+(2, 'Elaina', 'Elaina@utar.my', '$2y$10$TJLNpsacw9rA/NN1/dkbs.oMdlPftYGJoPMSebbsScRFuDKwBntdq', 'user', '2025-03-22 06:45:40'),
+(3, 'JohnDoe', 'JohnDoe@utar.my', '$2y$10$abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd12', 'user', '2025-03-22 06:46:00');
+
+-- Insert data into Competitions table
+INSERT INTO Competitions (competition_id, title, description, start_date, end_date, created_by) VALUES
+(1, 'Chicken Nuggets', 'Chicken Nugget Numba 1', '2025-03-22', '2025-03-30', 1);

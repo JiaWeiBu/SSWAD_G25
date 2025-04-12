@@ -8,6 +8,7 @@ session_start();
 $auth = new AuthController($db);
 $userController = new UserController($db);
 
+// Check if the user is authenticated
 if (!$auth->isAuthenticated()) {
     header("Location: login.php");
     exit();
@@ -16,6 +17,7 @@ if (!$auth->isAuthenticated()) {
 $userId = $auth->getUserId();
 $user = $userController->getUserById($userId);
 
+// Handle form submission for updating the profile
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -42,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>User Profile</h2>
         <?php if (!empty($success)) echo "<p class='success'>$success</p>"; ?>
         <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
+        
+        <!-- Profile update form -->
         <form method="post" action="">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>

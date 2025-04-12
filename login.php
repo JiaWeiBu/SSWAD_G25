@@ -4,18 +4,24 @@ require_once 'db.php'; // Ensure database connection is included
 require_once 'controllers/AuthController.php';
 
 $authController = new AuthController($db); // Pass the database connection
-$error = ""; // Initialize error variable
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $remember = isset($_POST['remember']);
     
+    // Debugging: Check input values
+    // echo "Email: $email, Password: $password, Remember: $remember";
+
     if ($authController->login($email, $password, $remember)) {
+        // Debugging: Login success
+        // echo "Login successful!";
         header("Location: dashboard.php"); // Redirect to dashboard after successful login
         exit();
     } else {
-        $error = "Invalid email or password!";
+        // Debugging: Login failed
+        // echo "Login failed!";
+        echo "<script>alert('Invalid email or password!');</script>";
     }
 }
 ?>
@@ -31,10 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        
-        <?php if (!empty($error)): ?>
-            <p class='error'><?php echo htmlspecialchars($error); ?></p>
-        <?php endif; ?>
 
         <form action="login.php" method="POST">
             <input type="email" name="email" placeholder="Email" required>
@@ -44,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </label>
             <button type="submit">Login</button>
         </form>
+        <p><a href="forgot_password.php">Forgot Password?</a></p>
         <p>Don't have an account? <a href="register.php">Register here</a></p>
     </div>
 </body>

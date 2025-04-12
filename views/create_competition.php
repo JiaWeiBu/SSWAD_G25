@@ -8,11 +8,13 @@ session_start();
 $auth = new AuthController($db);
 $competitionController = new CompetitionController($db);
 
+// Check if the user is authenticated
 if (!$auth->isAuthenticated()) {
     header("Location: login.php");
     exit();
 }
 
+// Handle form submission for creating a competition
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
     $description = $_POST['description'] ?? '';
@@ -40,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h2>Create a New Competition</h2>
         <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
+        
+        <!-- Competition creation form -->
         <form method="post" action="">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>

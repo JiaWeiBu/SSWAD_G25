@@ -8,11 +8,13 @@ session_start();
 $auth = new AuthController($db);
 $competitionController = new CompetitionController($db);
 
+// Check if the user is authenticated
 if (!$auth->isAuthenticated()) {
     header("Location: login.php");
     exit();
 }
 
+// Fetch all competitions
 $competitions = $competitionController->getAllCompetitions();
 ?>
 
@@ -35,6 +37,12 @@ $competitions = $competitionController->getAllCompetitions();
                     <p><?php echo nl2br(htmlspecialchars($competition['description'])); ?></p>
                     <p>Start Date: <?php echo $competition['start_date']; ?> | End Date: <?php echo $competition['end_date']; ?></p>
                     <a href="competition_details.php?id=<?php echo $competition['competition_id']; ?>">View Details</a>
+
+                    <!-- Show edit and delete options for admins or the creator -->
+                    <?php if ($auth->isAdmin() || $auth->getUserId() == $competition['created_by']): ?>
+                        <a href="edit_competition.php?id=<?php echo $competition['competition_id']; ?>">Edit</a>
+                        <a href="delete_competition.php?id=<?php echo $competition['competition_id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                    <?php endif; ?>
                 </li>
             <?php endforeach; ?>
         </ul>

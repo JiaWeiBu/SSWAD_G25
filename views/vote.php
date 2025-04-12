@@ -12,15 +12,19 @@ $voteController = new VoteController($db);
 $competitionController = new CompetitionController($db);
 $entryController = new EntryController($db);
 
+// Check if the user is authenticated
 if (!$auth->isAuthenticated()) {
     header("Location: login.php");
     exit();
 }
 
-$competitionId = $_GET['competition_id'] ?? null;
-$entries = $competitionId ? $entryController->getEntriesByCompetition($competitionId) : [];
+// Retrieve competition entries from the session
+$entries = $_SESSION['entries'] ?? [];
+unset($_SESSION['entries']); // Clear session data after use
+
 $userId = $auth->getUserId();
 
+// Handle form submission for voting
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['entry_id'])) {
     $entryId = $_POST['entry_id'];
     if ($voteController->castVote($userId, $entryId)) {
@@ -45,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['entry_id'])) {
         <h2>Vote for a Competition Entry</h2>
         <?php if (!empty($error)) echo "<p class='error'>$error</p>"; ?>
         
+        <!-- Voting form -->
         <form method="post" action="">
             <label for="entry">Select an Entry:</label>
             <select id="entry" name="entry_id" required>
