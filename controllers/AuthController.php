@@ -246,5 +246,25 @@ class AuthController {
         $stmt->bind_param("si", $hashedPassword, $userId);
         return $stmt->execute();
     }
+
+    /**
+     * Check if the currently logged-in user is an admin.
+     * 
+     * @return bool True if the user is an admin, false otherwise.
+     * Example: $authController->isAdmin();
+     */
+    public function isAdmin() {
+        if (!$this->isAuthenticated()) {
+            return false;
+        }
+
+        $userId = $this->getUserId();
+        $stmt = $this->db->prepare("SELECT role FROM Users WHERE user_id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+
+        return isset($result['role']) && $result['role'] === 'admin';
+    }
 }
 ?>

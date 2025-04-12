@@ -83,7 +83,15 @@ CREATE OR REPLACE TABLE Votes (
     FOREIGN KEY (entry_id) REFERENCES CompetitionEntries(entry_id) ON DELETE CASCADE
 );
 
--- sample text data
+-- Insert data into Users table
+INSERT INTO Users (user_id, username, email, password_hash, role, created_at) VALUES
+(1, 'Admin', 'Admin@utar.my', '$2y$10$BNyytPQTylj1kgIUhs6vNO3lPZDVwJzBIYX.JLDvjXuNrUQdIqeMi', 'admin', '2025-03-22 06:45:25'),
+(2, 'Elaina', 'Elaina@utar.my', '$2y$10$TJLNpsacw9rA/NN1/dkbs.oMdlPftYGJoPMSebbsScRFuDKwBntdq', 'user', '2025-03-22 06:45:40'),
+(3, 'JohnDoe', 'JohnDoe@utar.my', '$2y$10$abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd12', 'user', '2025-03-22 06:46:00'),
+(4, 'Mindo', 'Mindo@utar.my', '$2y$10$abcd5678abcd5678abcd5678abcd5678abcd5678abcd5678abcd56', 'user', '2025-03-22 06:46:20'),
+(5, 'Alice', 'Alice@utar.my', '$2y$10$abcd9012abcd9012abcd9012abcd9012abcd9012abcd9012abcd90', 'user', '2025-03-22 06:46:40');
+
+-- Insert data into Ingredients table
 INSERT INTO Ingredients (name, description) VALUES
 ('Lettuce', 'Fresh lettuce leaves'),
 ('Tomato', 'Sliced tomatoes'),
@@ -95,6 +103,7 @@ INSERT INTO Ingredients (name, description) VALUES
 ('Mustard', 'Yellow mustard'),
 ('Foot-long Bread', 'Freshly baked foot-long bread');
 
+-- Insert data into Recipes table
 INSERT INTO Recipes (user_id, title, cuisine, instructions) VALUES
 (1, 'Turkey Sandwich', 'American', 'Layer turkey, lettuce, tomato, and cucumber on bread. Add mayonnaise and mustard.'),
 (1, 'Ham Sandwich', 'American', 'Layer ham, lettuce, tomato, and cucumber on bread. Add mayonnaise and mustard.'),
@@ -102,6 +111,7 @@ INSERT INTO Recipes (user_id, title, cuisine, instructions) VALUES
 (2, 'Veggie Sandwich', 'American', 'Layer lettuce, tomato, cucumber, and cheese on bread. Add mayonnaise and mustard.'),
 (3, 'Cheese Sandwich', 'American', 'Layer cheese, lettuce, tomato, and cucumber on bread. Add mayonnaise and mustard.');
 
+-- Insert data into RecipeIngredients table
 INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity) VALUES
 (1, 1, '1 cup'),
 (1, 2, '1 cup'),
@@ -143,12 +153,6 @@ INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity) VALUES
 (5, 7, '2 tbsp'),
 (5, 8, '1 tbsp'),
 (5, 9, '1 foot-long');
-
--- Insert data into Users table
-INSERT INTO Users (user_id, username, email, password_hash, role, created_at) VALUES
-(1, 'Admin', 'Admin@utar.my', '$2y$10$BNyytPQTylj1kgIUhs6vNO3lPZDVwJzBIYX.JLDvjXuNrUQdIqeMi', 'user', '2025-03-22 06:45:25'),
-(2, 'Elaina', 'Elaina@utar.my', '$2y$10$TJLNpsacw9rA/NN1/dkbs.oMdlPftYGJoPMSebbsScRFuDKwBntdq', 'user', '2025-03-22 06:45:40'),
-(3, 'JohnDoe', 'JohnDoe@utar.my', '$2y$10$abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd12', 'user', '2025-03-22 06:46:00');
 
 -- Insert data into Competitions table
 INSERT INTO Competitions (competition_id, title, description, start_date, end_date, created_by) VALUES
