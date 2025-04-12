@@ -21,7 +21,7 @@ CREATE OR REPLACE TABLE Ingredients (
     ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) UNIQUE NOT NULL,
     description TEXT
-);
+);  data
 
 CREATE OR REPLACE TABLE RecipeIngredients (
     recipe_id INT,
