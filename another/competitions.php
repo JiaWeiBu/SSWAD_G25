@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file displays a list of all competitions.
+ * It sorts competitions by their status and provides a button to create a new competition.
+ * 
+ * Key Features:
+ * - Fetches all competitions from the database.
+ * - Sorts competitions by status (active, ended, future).
+ * - Displays competitions in a card layout.
+ */
+
 require_once 'db.php'; // Include database connection
 include 'header.php'; // Include header for navigation and session handling
 

@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file handles liking or unliking a competition entry.
+ * It ensures the user is logged in and updates the like status in the database.
+ * 
+ * Key Features:
+ * - Validates user authentication.
+ * - Toggles the like status for a competition entry.
+ * - Redirects to the competition details page.
+ */
+
 require_once 'db.php';
 session_start();
 

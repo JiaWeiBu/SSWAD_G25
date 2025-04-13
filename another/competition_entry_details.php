@@ -1,4 +1,13 @@
 <?php
+/**
+ * This file displays the details of a competition entry.
+ * It shows entry information, associated recipe, and comments.
+ * 
+ * Key Features:
+ * - Fetches entry details and associated recipe.
+ * - Displays comments and allows users to add/edit/delete comments.
+ * - Provides options to like the entry or edit/delete it for the author.
+ */
 require_once 'db.php';
 include 'header.php';
 
@@ -173,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'toggle_like.php', true);
+        xhr.open('POST', 'competition_toggle_like.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (xhr.status === 200) {

@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file allows users to edit their competition entries.
+ * It validates user input and updates the entry in the database.
+ * 
+ * Key Features:
+ * - Fetches entry details and validates user authorization.
+ * - Displays a form for editing the entry.
+ * - Updates the entry in the database on form submission.
+ */
+
 require_once 'db.php';
 
 // Check if a session is already active

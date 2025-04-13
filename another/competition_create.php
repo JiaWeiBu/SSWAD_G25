@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file handles the creation of a new competition.
+ * It validates user input, ensures the user is logged in, and inserts the competition into the database.
+ * 
+ * Key Features:
+ * - Validates form inputs (title, description, start date, end date).
+ * - Ensures the start date is today or in the future.
+ * - Ensures the end date is after the start date.
+ * - Inserts the competition into the database.
+ * - Redirects to the competitions page on success.
+ */
+
 require_once 'db.php'; // Include database connection
 include 'header.php'; // Include header for navigation and session handling
 

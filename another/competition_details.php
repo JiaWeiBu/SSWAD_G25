@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file displays the details of a competition.
+ * It shows competition information, entries, and allows user interactions like liking and commenting.
+ * 
+ * Key Features:
+ * - Fetches competition details and entries from the database.
+ * - Displays competition status (upcoming, ongoing, completed).
+ * - Allows users to submit entries, like entries, and comment.
+ * - Provides options to edit or delete the competition for the creator.
+ */
 require_once 'db.php'; // Include database connection
 include 'header.php'; // Include header for navigation and session handling
 
@@ -286,7 +296,7 @@ $entries = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         }
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'toggle_like.php', true);
+        xhr.open('POST', 'competition_toggle_like.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (xhr.status === 200) {

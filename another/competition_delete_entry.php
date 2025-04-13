@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file handles the deletion of a competition entry.
+ * It ensures the user is authorized to delete the entry before performing the deletion.
+ * 
+ * Key Features:
+ * - Validates the entry ID and user ID.
+ * - Verifies that the user is the author of the entry.
+ * - Deletes the entry from the database.
+ */
+
 require_once 'db.php';
 session_start();
 

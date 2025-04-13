@@ -1,4 +1,13 @@
 <?php
+/**
+ * This file allows the creator of a competition to edit its details.
+ * It validates user input and updates the competition in the database.
+ * 
+ * Key Features:
+ * - Fetches competition details and validates user authorization.
+ * - Displays a form for editing the competition.
+ * - Updates the competition in the database on form submission.
+ */
 require_once 'db.php'; // Include database connection
 include 'header.php'; // Include header for navigation and session handling
 

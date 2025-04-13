@@ -1,4 +1,13 @@
 <?php
+/**
+ * This file allows users to submit entries to a competition.
+ * It validates user input and inserts the entry into the database.
+ * 
+ * Key Features:
+ * - Fetches the user's recipes for selection.
+ * - Displays a form for submitting an entry.
+ * - Inserts the entry into the database on form submission.
+ */
 require_once 'db.php';
 include 'header.php'; // Include header for navigation and session handling
 

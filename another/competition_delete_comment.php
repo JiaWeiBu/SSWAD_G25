@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file handles the deletion of a competition comment.
+ * It ensures the user is authorized to delete the comment before performing the deletion.
+ * 
+ * Key Features:
+ * - Validates the comment ID and user ID.
+ * - Verifies that the user is the author of the comment.
+ * - Deletes the comment from the database.
+ */
+
 require_once 'db.php';
 session_start();
 
