@@ -80,11 +80,13 @@ usort($competitions, function ($a, $b) {
 <div class="container mt-3">
     <h2 class="text-center">Competitions</h2>
     <!-- Button to create a new competition -->
-    <?php if (isset($_SESSION['user_id'])): ?>
-        <a href="competition_create.php" class="btn btn-primary mb-3">Create New Competition</a>
-    <?php else: ?>
-        <button class="btn btn-primary mb-3" onclick="promptSignIn()">Create New Competition</button>
-    <?php endif; ?>
+    <div class="d-flex justify-content-end">
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="competition_create.php" class="btn btn-primary mb-3">Create New Competition</a>
+        <?php else: ?>
+            <button class="btn btn-primary mb-3" onclick="promptSignIn()">Create New Competition</button>
+        <?php endif; ?>
+    </div>
     <div class="row">
         <?php foreach ($competitions as $competition): ?>
             <div class="col-md-4 mb-3">

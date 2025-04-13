@@ -26,14 +26,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $recipeId = $_POST['recipe_id'] ?? '';
-    $stmt = $db->prepare("INSERT INTO competition_entries (competition_id, user_id, recipe_id) VALUES (?, ?, ?)");
-    $stmt->bind_param("iii", $competitionId, $userId, $recipeId);
+    $title = $_POST['title'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $submission = $_POST['submission'] ?? '';
 
-    if ($stmt->execute()) {
-        header("Location: competition_details.php?id=$competitionId");
-        exit();
+    if (empty($title) || empty($description) || empty($submission)) {
+        $error = "All fields are required.";
     } else {
-        $error = "Failed to submit entry.";
+        $stmt = $db->prepare("INSERT INTO competition_entries (competition_id, user_id, recipe_id, title, description, submission) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iiisss", $competitionId, $userId, $recipeId, $title, $description, $submission);
+
+        if ($stmt->execute()) {
+            header("Location: competition_details.php?id=$competitionId");
+            exit();
+        } else {
+            $error = "Failed to submit entry.";
+        }
     }
 }
 ?>
@@ -68,10 +76,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" name="title" id="title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="submission" class="form-label">Submission:</label>
+                <textarea name="submission" id="submission" class="form-control" rows="5" required></textarea>
+            </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     <?php endif; ?>
 </div>
-<?php include 'footer.php'; ?>

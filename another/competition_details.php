@@ -319,7 +319,7 @@ $entries = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     function deleteCompetition(competitionId) {
         if (confirm('Are you sure you want to delete this competition? This action cannot be undone.')) {
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'delete_competition.php', true);
+            xhr.open('POST', 'competition_delete_entry.php', true); // Updated file reference
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 if (xhr.status === 200) {

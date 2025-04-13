@@ -4,6 +4,7 @@ include 'header.php';
 
 $entryId = $_GET['id'] ?? null; // Changed 'entry_id' to 'id'
 $competitionId = $_GET['competition_id'] ?? null; // Get competition ID from query parameter
+$returnUrl = $_GET['returnUrl'] ?? null; // Get the returnUrl parameter from the query string
 
 if (!$entryId) {
     echo "<div class='container mt-3'><p class='text-danger'>Error: Entry ID is missing in the URL.</p></div>";
@@ -79,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("iis", $entryId, $userId, $content);
         }
         $stmt->execute();
-        header("Location: " . $_SERVER['PHP_SELF'] . "?id=$entryId&competition_id=$competitionId"); // Include competition_id in the URL
+        header("Location: " . $_SERVER['PHP_SELF'] . "?id=$entryId&competition_id=$competitionId&returnUrl=" . urlencode($returnUrl)); // Include competition_id and returnUrl in the URL
         exit();
     }
 }
@@ -88,7 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container mt-3">
     <!-- Back to Competition Details Button -->
     <div class="mb-3">
-        <a href="competition_details.php?id=<?php echo $competitionId; ?>" class="btn btn-outline-primary">← Back to Competition Details</a>
+        <a href="<?php echo $returnUrl ? htmlspecialchars($returnUrl) : "competition_details.php?id=$competitionId"; ?>" 
+           class="btn btn-outline-primary">← Back to Competition Details</a>
     </div>
 
     <h2><?php echo htmlspecialchars($entryDetails['title']); ?></h2>
@@ -102,7 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Edit and Delete Buttons for Entry -->
     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $entryDetails['user_id']): ?>
         <div class="mt-3">
-            <a href="edit_entry.php?id=<?php echo $entryId; ?>" class="btn btn-secondary">Edit Entry</a>
+            <a href="competition_edit_entry.php?id=<?php echo $entryId; ?>&competition_id=<?php echo $competitionId; ?>&returnUrl=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
+               class="btn btn-secondary">Edit Entry</a>
             <button class="btn btn-danger" onclick="deleteEntry(<?php echo $entryId; ?>)">Delete Entry</button>
         </div>
     <?php endif; ?>
@@ -188,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function deleteEntry(entryId) {
         if (confirm('Are you sure you want to delete this entry?')) {
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'delete_entry.php', true);
+            xhr.open('POST', 'competition_delete_entry.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 if (xhr.status === 200) {
@@ -270,7 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function deleteComment(commentId) {
         if (confirm('Are you sure you want to delete this comment?')) {
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'delete_comment.php', true);
+            xhr.open('POST', 'competition_delete_comment.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 if (xhr.status === 200) {
