@@ -1,0 +1,325 @@
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* Header Styles (Overridden by Bootstrap Navbar) */
+header {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.75rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: whitesmoke;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Headings */
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: green;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0 0.75rem;
+    color: gray;
+}
+
+/* Messages */
+.success {
+    color: greenyellow;
+    background-color: whitesmoke;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.error {
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: gray;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem;
+    border: 1px solid wheat;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: greenyellow;
+    box-shadow: 0 0 0 2px green;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+button {
+    background-color: black;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: black;
+}
+
+/* Options and Navigation */
+.group-options,
+.sort-options,
+.week-navigation {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.group-options a,
+.sort-options a,
+.week-navigation a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.group-options a:hover,
+.sort-options a:hover,
+.week-navigation a:hover {
+    color: gray;
+}
+
+.group-options a.active,
+.sort-options a.active {
+    font-weight: bold;
+}
+
+.week-navigation span {
+    font-weight: 500;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid whitesmoke;
+    width: 90px;
+}
+
+th {
+    background-color: white;
+    color: gray;
+}
+
+td a {
+    color: black;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 0.5rem 0.5rem;
+    }
+
+    main {
+        margin: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .group-options,
+    .sort-options,
+    .week-navigation {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+footer {
+    position: bottom;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .container {
+    margin-bottom: 0;
+}
+
+/* Adjust Bootstrap Elements */
+.navbar-brand, .nav-link {
+    color: white !important;
+}
+
+.nav-link:hover {
+    color: whitesmoke !important;
+}
+
+.form-check-inline {
+    margin-right: 1rem;
+}
+
+/* Additional Styles for Saved Meal Plan Summary */
+.saved-plan-details {
+    margin-bottom: 1.5rem;
+}
+
+.saved-plan-details h3 {
+    font-size: 1.25rem;
+    color: gray;
+    margin-bottom: 0.75rem;
+}
+
+.saved-plan-details p {
+    margin: 0.25rem 0;
+}
+
+/* Table Action Links */
+.meal-plan-table a[href*="view"] {
+    color: #4CAF50;
+    margin-right: 0.5rem;
+}
+
+.meal-plan-table a[href*="view"]:hover {
+    color: #45a049;
+}
+
+.meal-plan-table a[href*="meal_planning"] {
+    color: #1976d2;
+    margin-right: 0.5rem;
+}
+
+.meal-plan-table a[href*="meal_planning"]:hover {
+    color: #1565c0;
+}
+
+.meal-plan-table a[href*="delete"] {
+    color: #d32f2f;
+}
+
+.meal-plan-table a[href*="delete"]:hover {
+    color: #c62828;
+}
+
+
